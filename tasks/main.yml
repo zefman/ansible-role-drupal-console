@@ -9,7 +9,7 @@
 
 - name: Install Drupal Console into the current directory.
   shell: >
-    curl -LSs http://drupalconsole.com/installer | php
+    curl http://drupalconsole.com/installer -L -o drupal.phar
     creates={{ drupal_console_path }}
 
 - name: Move Drupal Console into globally-accessible location.
@@ -23,3 +23,4 @@
   register: drupal_console_update
   changed_when: "'console has been updated' in drupal_console_update.stdout"
   when: drupal_console_keep_updated
+  ignore_errors: yes
